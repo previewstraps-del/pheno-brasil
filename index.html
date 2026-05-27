@@ -660,9 +660,35 @@ nav { background: var(--bg); border-bottom: 1px solid var(--border); padding: 0 
         
         // Busca os breeders no Firestore
         try {
+          
             const snapshot = await getDocs(collection(db, "users"));
             grid.innerHTML = '';
             
+        // 2. ADICIONAR O BOTÃO "TODOS" NO FINAL DA GRID
+        const btnTodos = document.createElement('a');
+        btnTodos.innerText = 'Todos';
+        btnTodos.href = 'breeders.html';
+        btnTodos.className = 'btn-submit-form';
+        
+        // Estilização que você pediu
+        btnTodos.style.display = 'inline-block';
+        btnTodos.style.textDecoration = 'none';
+        btnTodos.style.padding = '1rem 1rem';
+        btnTodos.style.backgroundColor = 'var(--green)';
+        btnTodos.style.color = '#000';
+        btnTodos.style.fontFamily = "'Barlow Condensed', sans-serif";
+        btnTodos.style.fontSize = '2.5rem';
+        btnTodos.style.fontWeight = '700';
+        btnTodos.style.textTransform = 'uppercase';
+        btnTodos.style.borderRadius = '5px';
+        btnTodos.style.transition = 'background-color 0.2s';
+        btnTodos.style.textAlign = 'center';
+        btnTodos.style.gridColumn = "1 /0"; 
+btnTodos.style.justifySelf = "center"; // Isso centraliza o botão horizontalmente
+btnTodos.style.width = "fit-content";
+        // Adiciona o botão como o último elemento da grid
+        grid.appendChild(btnTodos);
+
             snapshot.forEach(doc => {
                 const b = doc.data();
                 // Filtra apenas quem tem role ou tipo 'breeder'
@@ -677,6 +703,7 @@ nav { background: var(--bg); border-bottom: 1px solid var(--border); padding: 0 
                         
                 }
 
+// Substitua a parte onde você cria o botão dentro da função por isso:
 
 
             });
@@ -689,31 +716,7 @@ nav { background: var(--bg); border-bottom: 1px solid var(--border); padding: 0 
         }
 
 
-// Substitua a parte onde você cria o botão dentro da função por isso:
 
-// 1. Criar o container do botão
-const divBtn = document.createElement('div');
-divBtn.style.marginBottom = '20px';
-
-// 2. Criar um LINK que parece um botão
-const btnTodos = document.createElement('a');
-btnTodos.innerText = 'Todos';
-btnTodos.className = 'btn-submit-form'; // Mantém seu estilo CSS
-btnTodos.href = 'breeders.html'; // ESSE É O COMANDO QUE ABRE O ARQUIVO
-btnTodos.style.display = 'inline-block';
-btnTodos.style.textDecoration = 'none';
-btnTodos.style.padding = '1rem 1rem';
-btnTodos.style.backgroundColor = 'var(--green)';
-btnTodos.style.color = '#000';
-btnTodos.style.fontFamily = "'Barlow Condensed', sans-serif";
-btnTodos.style.fontSize = '1.5rem';
-btnTodos.style.fontWeight = '700';
-btnTodos.style.textTransform = 'uppercase';
-btnTodos.style.borderRadius = '5px';
-btnTodos.style.transition = 'background-color 0.2s';
-
-divBtn.appendChild(btnTodos);
-grid.appendChild(divBtn); // Adiciona o botão no topo da grade
     };
 
     window.fecharBreeders = () => {
